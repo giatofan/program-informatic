@@ -82,3 +82,10 @@
         <li class="footer"><a href="#">See All Messages</a></li>
     </ul>
 </li>--}}
+<script>
+	window.fleeqBarConfig = {
+		bar : "xlcpynv8ek-4pvr2q381f", //*Require, unique bar code
+		//selector: "#myButton" // Optional: custom selector
+	};
+</script>
+<script src="https://sdk.fleeq.io/fleeq-sdk-light.js"></script>

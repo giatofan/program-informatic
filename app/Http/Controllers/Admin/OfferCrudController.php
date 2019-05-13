@@ -111,6 +111,29 @@ class OfferCrudController extends CrudController
                'type' => 'checkbox',
             ]);
 
+            $this->crud->addFilter([ // select2 filter
+                'name' => 'service_id',
+                'type' => 'select2_multiple',
+                'label'=> 'Filtrează după Serviciu Ofertat'
+              ], function() {
+                    return \App\Models\Service::all()->keyBy('id')->pluck('name', 'id')->toArray();;
+              }, function($values) { // if the filter is active
+                foreach (json_decode($values) as $key => $value) {
+                        $this->crud->addClause('where', 'service_id', $value);
+                    }
+                //   $this->crud->addClause('where', 'service_id', $value);
+              });
+              
+              $this->crud->addFilter([ // simple filter
+                'type' => 'simple',
+                'name' => 'accepted',
+                'label'=> 'Arată doar ofertele acceptate'
+              ], 
+              false, 
+              function() { // if the filter is active
+                  $this->crud->addClause('where', 'accepted', 1);
+              } );
+
         // add asterisk for fields that are required in OfferRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
