@@ -15,9 +15,9 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->unsignedInteger('service_id');
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->integer('discount');
             $table->smallInteger('accepted');
             $table->timestamps();

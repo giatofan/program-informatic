@@ -43,6 +43,7 @@ class Offer extends Model
     {
         return $this->belongsTo('App\Models\Service');
     }
+    
     public function contract()
     {
         return $this->hasOne('App\Models\Contract');

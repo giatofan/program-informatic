@@ -1,9 +1,13 @@
 <?php
 
 use Illuminate\Database\Seeder;
+// use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
+
+    protected $toTruncate = ['users', 'password_resets', 'customers', 'services'];
+
     /**
      * Seed the application's database.
      *
@@ -11,6 +15,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // Model::unguard();
+
+        // foreach($this->toTruncate as $table) {
+        //     DB::table($table)->truncate();
+        // }
+
+        $this->call([
+            UsersTableSeeder::class,
+            CustomersTableSeeder::class,
+            ServicesTableSeeder::class,
+            OffersTableSeeder::class,
+            ContractsTableSeeder::class,
+        ]);
+
+        // Model::reguard();
     }
 }
